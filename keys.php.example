@@ -1,0 +1,11 @@
+<?php
+
+$keys = array(
+	'oauth_consumer_key' => '', // API key
+	'consumer_secret' => '', // API secret
+	'oauth_token' => '', // access token
+	'oauth_token_secret' => '' // access token secret
+);
+
+?>
+
