@@ -1,4 +1,5 @@
 <?php
+
 class Context
 {
 	private $data;
@@ -11,8 +12,9 @@ class Context
 
 	public static function getInstance()
 	{
-		if(self::$instance==null)
-			self::$instance=new context();
+		if (self::$instance == null)
+			self::$instance = new context();
+
 		return self::$instance;
 	}
 
@@ -21,7 +23,7 @@ class Context
 
 	public function redirect($url)
 	{
-		header("location:".$url);
+		header('location: '.$url);
 	}
 
 	public function __get($prop)
@@ -31,7 +33,7 @@ class Context
 
 	public function __set($prop,$value)
 	{
-		$this->data[$prop]=$value;
+		$this->data[$prop] = $value;
 	}
 
 	public function __isset($prop)
@@ -39,3 +41,5 @@ class Context
 		return isset($this->data[$prop]);
 	}
 }
+
+?>
