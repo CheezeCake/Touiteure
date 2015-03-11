@@ -8,6 +8,8 @@ class Controller
 			$api->getRequest('https://api.twitter.com/1.1/statuses/home_timeline.json', array('count' => 10)),
 			true);
 
+		Controller::process_tweet($context);
+
 		$data = json_decode(
 			$api->getRequest('https://api.twitter.com/1.1/account/settings.json'),
 			true);
@@ -27,6 +29,8 @@ class Controller
 		$json = $api->getRequest('https://api.twitter.com/1.1/statuses/user_timeline.json',
 			array('screen_name' => $request['screen_name']));
 		$context->tweets = json_decode($json, true);
+
+		Controller::process_tweet($context);
 	}
 
 	public static function profile_search($context, $request, $api)
@@ -52,6 +56,43 @@ class Controller
 			$request['status'] = urlencode($request['status']);
 
 		$context->data = json_decode($api->postRequest('https://api.twitter.com/1.1/statuses/update.json', $request), true);
+	}
+
+	private static function process_tweet(&$context)
+	{
+		$tweets = $context->tweets;
+
+		for ($tweetIndex = 0; $tweetIndex < sizeof($context->tweets); $tweetIndex++) {
+			$tweet = $tweets[$tweetIndex];
+
+			$text = $tweet['text'];
+
+			// urls
+			$text = preg_replace_callback('/((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?)/',
+				function ($match) {
+					return '<a href="'.$match[0].'">'.$match[0].'</a>';
+				},
+				$text);
+
+			// hashtags
+			$text = preg_replace_callback('/#\w*/',
+				function ($match) {
+					return '<strong>'.$match[0].'</strong>';
+				},
+				$text);
+
+			// user mentions
+			$text = preg_replace_callback('/@\w*/',
+				function ($match) {
+					return '<a href="Touiteure.php?action=profile&screen_name='.substr($match[0], 1).'">'.$match[0].'</a>';
+				},
+				$text);
+
+			$tweet['text'] = $text;
+			$tweets[$tweetIndex] = $tweet;
+		}
+
+		$context->tweets = $tweets;
 	}
 }
 
