@@ -11,6 +11,7 @@ class Controller
 		$data = json_decode(
 			$api->getRequest('https://api.twitter.com/1.1/account/settings.json'),
 			true);
+		$context->tmp = $data;
 		$screen_name = $data['screen_name'];
 
 		$json = $api->getRequest('https://api.twitter.com/1.1/users/show.json', array('screen_name' => $screen_name));
@@ -30,6 +31,20 @@ class Controller
 
 	public static function profile_search($context, $request, $api)
 	{}
+
+	public static function settings($context, $request, $api)
+	{
+		$context->settings = json_decode($api->getRequest('https://api.twitter.com/1.1/account/settings.json'), true);
+		$screen_name = $context->settings['screen_name'];
+
+		$json = $api->getRequest('https://api.twitter.com/1.1/users/show.json', array('screen_name' => $screen_name));
+		$context->data = json_decode($json, true);
+	}
+
+	public static function change_settings($context, $request, $api)
+	{
+		$context->data = json_decode($api->postRequest('https://api.twitter.com/1.1/account/update_profile.json', $request), true);
+	}
 }
 
 ?>

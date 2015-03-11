@@ -46,10 +46,11 @@ class TwitterAPI
 			'oauth_version' => '1.0'
 		);
 
-		if ($method == 'GET') {
-			// TODO: remove the ? characters in $fileds (?)
+		if ($method == 'GET')
 			$oauth += $fields;
-		}
+		else
+			$fields = $this->cleanFields($fields);
+
 
 		$oauth['oauth_signature'] = $this->createSignature($url, $method,
 			$oauth);
@@ -119,6 +120,14 @@ class TwitterAPI
 			$ret[] = $key.'='.$value;
 
 		return implode('&', $ret);
+	}
+
+	private static function cleanFields($fields)
+	{
+		foreach ($fields as $key => $value)
+			$fields[$key] = str_replace('+', ' ', $value);
+
+		return $fields;
 	}
 }
 
