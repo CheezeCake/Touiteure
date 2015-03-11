@@ -23,6 +23,9 @@
 			<?php foreach ($context->tweets as $tweet): ?>
 				<div class="row">
 					<div class="col-md-12">
+						<?php if ($tweet['retweeted'] == 'true'): ?>
+							<strong>Retweeté</strong>
+						<?php endif; ?>
 						<?= $tweet['user']['name'] ?> (@<?= $tweet['user']['screen_name'] ?>)
 						<span class="pull-right"><?= $tweet['created_at'] ?></span>
 						<p><?= $tweet['text'] ?></p>
