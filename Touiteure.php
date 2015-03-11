@@ -15,7 +15,7 @@ if (array_key_exists('action', $_REQUEST)) {
 	Controller::$action($context, $_REQUEST, $api);
 
 	$view = 'view/'.$action.'.php';
-	if (array_key_exists('errors', $context->data))
+	if ($context->data != null && array_key_exists('errors', $context->data))
 		$view = 'view/error.php';
 
 	include('layout/layout.php');
