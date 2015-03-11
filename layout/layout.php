@@ -17,6 +17,13 @@
     <!-- Custom CSS -->
     <link href="css/shop-item.css" rel="stylesheet">
 
+	<script src="js/jquery.js"></script>
+	<link rel="stylesheet" href="css/animate.css">
+	<script src="js/bootstrap.js"></script>
+	<script src="js/noty.min.js"></script>
+	<script src="js/bootbox.min.js"></script>
+	<script src="js/script.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,6 +61,9 @@
                         <a href="Touiteure.php?action=settings">Settings</a>
                     </li>
                 </ul>
+				<ul class="pull-right nav navbar-nav">
+					<li><button id="tweet" type="button" class="btn btn-primary">Tweet</button></li>
+				</ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

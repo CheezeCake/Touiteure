@@ -26,8 +26,11 @@
 						<?php if ($tweet['retweeted'] == 'true'): ?>
 							<strong>Retweeté</strong>
 						<?php endif; ?>
+						<?php if ($tweet['favorited'] == 'true'): ?>
+							<strong>, mis en favori</strong>
+						<?php endif; ?>
 						<?= $tweet['user']['name'] ?> (@<?= $tweet['user']['screen_name'] ?>)
-						<span class="pull-right"><?= $tweet['created_at'] ?></span>
+						<span class="pull-right"><?= date('D, d M Y H:i:s', strtotime($tweet['created_at'])) ?></span>
 						<p><?= $tweet['text'] ?></p>
 					</div>
 				</div>

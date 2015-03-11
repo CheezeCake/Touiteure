@@ -45,6 +45,14 @@ class Controller
 	{
 		$context->data = json_decode($api->postRequest('https://api.twitter.com/1.1/account/update_profile.json', $request), true);
 	}
+
+	public static function tweet($context, $request, $api)
+	{
+		if (array_key_exists('status', $request))
+			$request['status'] = urlencode($request['status']);
+
+		$context->data = json_decode($api->postRequest('https://api.twitter.com/1.1/statuses/update.json', $request), true);
+	}
 }
 
 ?>
