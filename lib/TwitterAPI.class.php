@@ -25,7 +25,7 @@ class TwitterAPI
 		$this->credentials = $APIParams;
 	}
 
-	public function getRequest($url, $fields)
+	public function getRequest($url, $fields = array())
 	{
 		return $this->request($url, 'GET', $fields);
 	}
