@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#tweet').click(function() {
-		bootbox.prompt("What is your name?", function(result) {
+		bootbox.prompt('Écrire un nouveau Tweet', function(result) {
 			if (result !== null && result.length > 0) {
 				data = 'status=' + encodeURI(result);
 
