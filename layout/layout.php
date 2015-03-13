@@ -18,9 +18,7 @@
     <link href="css/shop-item.css" rel="stylesheet">
 
 	<script src="js/jquery.js"></script>
-	<link rel="stylesheet" href="css/animate.css">
 	<script src="js/bootstrap.js"></script>
-	<script src="js/noty.min.js"></script>
 	<script src="js/bootbox.min.js"></script>
 	<script src="js/script.js"></script>
 
