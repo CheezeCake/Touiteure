@@ -18,6 +18,8 @@
 
 			</div>
 
+			<button class="center-block btn center" id="homeload">Load more</button>
+
 		</div>
 
 	</div>

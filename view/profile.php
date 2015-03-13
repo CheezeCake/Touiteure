@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="profile">
 
 	<div class="row">
 
@@ -6,7 +6,7 @@
 			<div>
 				<img src="<?= $context->data['profile_image_url'] ?>">
 			</div>
-			<p class="lead"><?= $context->data['name'] ?> (<a href="Touiteure.php?action=profile&screen_name=<?= $context->data['screen_name'] ?>">@<?= $context->data['screen_name'] ?></a>)</p>
+			<p class="lead" id="<?= $context->data['screen_name'] ?>"><?= $context->data['name'] ?> (<a href="Touiteure.php?action=profile&screen_name=<?= $context->data['screen_name'] ?>">@<?= $context->data['screen_name'] ?></a>)</p>
 		</div>
 
 		<div class="col-md-9">
@@ -23,6 +23,8 @@
 				<?php include('view/tweets.php'); ?>
 
 			</div>
+
+			<button class="center-block btn center" id="profileload">Load more</button>
 
 		</div>
 

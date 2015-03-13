@@ -33,6 +33,25 @@ class Controller
 		Controller::process_tweet($context);
 	}
 
+	public static function load_home_tweets($context, $request, $api)
+	{
+		$context->tweets = json_decode(
+			$api->getRequest('https://api.twitter.com/1.1/statuses/home_timeline.json',
+			array('count' => 10, 'max_id' => $request['id'])),
+			true);
+
+		Controller::process_tweet($context);
+	}
+
+	public static function load_profile_tweets($context, $request, $api)
+	{
+		$json = $api->getRequest('https://api.twitter.com/1.1/statuses/user_timeline.json',
+			array('screen_name' => $request['screen_name'], 'max_id' => $request['id']));
+		$context->tweets = json_decode($json, true);
+
+		Controller::process_tweet($context);
+	}
+
 	public static function profile_search($context, $request, $api)
 	{}
 
@@ -72,21 +91,21 @@ class Controller
 				function ($match) {
 					return '<a href="'.$match[0].'">'.$match[0].'</a>';
 				},
-				$text);
+					$text);
 
 			// hashtags
 			$text = preg_replace_callback('/#\w*/',
 				function ($match) {
 					return '<strong>'.$match[0].'</strong>';
 				},
-				$text);
+					$text);
 
 			// user mentions
 			$text = preg_replace_callback('/@\w*/',
 				function ($match) {
 					return '<a href="Touiteure.php?action=profile&screen_name='.substr($match[0], 1).'">'.$match[0].'</a>';
 				},
-				$text);
+					$text);
 
 			$tweet['text'] = $text;
 			$tweets[$tweetIndex] = $tweet;
