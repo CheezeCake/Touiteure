@@ -6,22 +6,18 @@ require_once('controller/controller.class.php');
 
 require_once('keys.php');
 
-if (array_key_exists('action', $_REQUEST)) {
-	$action = $_REQUEST['action'];
-	$api = new TwitterAPI($keys);
+$action = (array_key_exists('action', $_REQUEST)) ? $_REQUEST['action'] : 'home';
 
-	$context = Context::getInstance();
+$api = new TwitterAPI($keys);
 
-	Controller::$action($context, $_REQUEST, $api);
+$context = Context::getInstance();
 
-	$view = 'view/'.$action.'.php';
-	if ($context->data != null && array_key_exists('errors', $context->data))
-		$view = 'view/error.php';
+Controller::$action($context, $_REQUEST, $api);
 
-	include('layout/layout.php');
-}
-else {
-	echo  'No action';
-}
+$view = 'view/'.$action.'.php';
+if ($context->data != null && array_key_exists('errors', $context->data))
+	$view = 'view/error.php';
+
+include('layout/layout.php');
 
 ?>
