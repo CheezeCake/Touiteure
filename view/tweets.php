@@ -13,6 +13,5 @@
 		</div>
 	</div>
 
-	<hr>
+	<hr class="sep">
 <?php endforeach; ?>
-

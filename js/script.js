@@ -26,6 +26,7 @@ $(document).ready(function() {
 			data: 'id=' + smallestId,
 			success: function(data) {
 				smallestIdTweet.replaceWith(data);
+				$('.sep:last').remove();
 			},
 			error: function(data) {
 				alert(data);
@@ -44,6 +45,7 @@ $(document).ready(function() {
 			data: 'screen_name=' + screenName + '&id=' + smallestId,
 			success: function(data) {
 				smallestIdTweet.replaceWith(data);
+				$('.sep:last').remove();
 			},
 			error: function(data) {
 				alert(data);
