@@ -88,30 +88,36 @@ class Controller
 
 			// urls
 			$text = preg_replace_callback('/((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?)/',
-				function ($match) {
-					return '<a href="'.$match[0].'">'.$match[0].'</a>';
-				},
-					$text);
+					'Controller::url_replace', $text);
 
 			// hashtags
 			$text = preg_replace_callback('/#\w*/',
-				function ($match) {
-					return '<strong>'.$match[0].'</strong>';
-				},
-					$text);
+					'Controller::hashtag_replace', $text);
 
 			// user mentions
 			$text = preg_replace_callback('/@\w*/',
-				function ($match) {
-					return '<a href="Touiteure.php?action=profile&screen_name='.substr($match[0], 1).'">'.$match[0].'</a>';
-				},
-					$text);
+				'Controller::user_mentions_replace', $text);
 
 			$tweet['text'] = $text;
 			$tweets[$tweetIndex] = $tweet;
 		}
 
 		$context->tweets = $tweets;
+	}
+
+	private static function url_replace($match)
+	{
+		return '<a href="'.$match[0].'">'.$match[0].'</a>';
+	}
+
+	private static function hashtag_replace($match)
+	{
+		return '<strong>'.$match[0].'</strong>';
+	}
+
+	private static function user_mentions_replace($match)
+	{
+		return '<a href="Touiteure.php?action=profile&screen_name='.substr($match[0], 1).'">'.$match[0].'</a>';
 	}
 }
 
